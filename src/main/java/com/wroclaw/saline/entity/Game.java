@@ -9,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Game {
@@ -22,9 +23,9 @@ public class Game {
     @JoinColumn(name = "user_id")
 	private User user;
 	@OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+	@JsonManagedReference
 	private Board board;
-	
+		
 	public Integer getId() {
 		return id;
 	}
@@ -40,7 +41,13 @@ public class Game {
 	public User getUser() {
 		return user;
 	}
-	public void setUsuario(User user) {
+	public void setUser(User user) {
 		this.user = user;
+	}
+	public Board getBoard() {
+		return board;
+	}
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 }

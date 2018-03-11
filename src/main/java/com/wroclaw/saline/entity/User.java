@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class User {
 
@@ -17,6 +19,7 @@ public class User {
 	private String name;
 	private String login;
 	private String password;
+	@JsonBackReference
 	@OneToMany(mappedBy="user")
 	private Set<Game> games;
 	
