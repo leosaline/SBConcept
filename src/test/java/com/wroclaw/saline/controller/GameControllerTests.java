@@ -1,6 +1,6 @@
 package com.wroclaw.saline.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,21 +17,28 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTests {
+public class GameControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@Test
-	public void whenSendUserCreateNewAndReturn() throws Exception {
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/newuser/leonardo/leo/teste");
-		String expected = "{\"id\":1,\"name\":\"leonardo\",\"login\":\"leo\",\"password\":\"teste\"}";
-		
+	public void whenSendLoginThenStartGame() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/newgame/leo");
+
 		mockMvc.perform(requestBuilder).andExpect(new ResultMatcher() {
 			@Override
 			public void match(MvcResult result) throws Exception {
-				assertEquals(expected, result.getResponse().getContentAsString());
+				assertNotNull(result.getResponse().getContentAsString());
 			}
 		});
 	}
+	
+	@Test
+	public void whenSendGameAndMoveThenReturnGameMoved() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/move");
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		
+		assertNotNull(result.getResponse().getContentAsString());
+	}
+
 }
