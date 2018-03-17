@@ -25,6 +25,7 @@ public class Game {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private Board board;
+	private boolean finished = false;
 		
 	public Integer getId() {
 		return id;
@@ -49,5 +50,11 @@ public class Game {
 	}
 	public void setBoard(Board board) {
 		this.board = board;
+	}
+	public boolean isFinished() {
+		return finished;
+	}
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 }

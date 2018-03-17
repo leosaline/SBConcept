@@ -1,5 +1,5 @@
 package com.wroclaw.saline.robo;
 
-public class JogadorRobo {
+public class RoboPlayer {
 
 }

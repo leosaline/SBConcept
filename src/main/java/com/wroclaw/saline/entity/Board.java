@@ -20,4 +20,20 @@ public class Board {
 		boardPositions = new PositionInBoard[3][3];
 		Arrays.stream(boardPositions).map(v -> EnumStatesOfBoard.EMPTY);
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public PositionInBoard[][] getBoardPositions() {
+		return boardPositions;
+	}
+
+	public void setBoardPositions(PositionInBoard[][] boardPositions) {
+		this.boardPositions = boardPositions;
+	}
 }
