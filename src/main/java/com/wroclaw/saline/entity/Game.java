@@ -26,6 +26,10 @@ public class Game {
 	@JsonManagedReference
 	private Board board;
 	private boolean finished = false;
+	
+	public Game() {
+		board = new Board();
+	}
 		
 	public Integer getId() {
 		return id;

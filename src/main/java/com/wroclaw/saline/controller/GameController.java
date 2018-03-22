@@ -1,6 +1,7 @@
 package com.wroclaw.saline.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,8 @@ public class GameController {
 		try {
 			return ResponseEntity.ok(gameService.startGame(game));
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
+			System.err.println(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Game());
 		}
 	}
 	

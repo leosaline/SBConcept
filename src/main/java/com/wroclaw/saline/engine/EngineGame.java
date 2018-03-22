@@ -10,17 +10,16 @@ public class EngineGame {
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				winner = game.getBoard().getBoardPositions()[i][j].getEnumStatesOfBoard().compareTo(
-						game.getBoard().getBoardPositions()[i][j + 1].getEnumStatesOfBoard());
-				if(game.getBoard().getBoardPositions()[i][j].getEnumStatesOfBoard().equals(EnumStatesOfBoard.EMPTY)) {
-					winner = 1;
-				}
+//				winner = game.getBoard().getBoardPositions()[i][j].getEnumStatesOfBoard().compareTo(
+//						game.getBoard().getBoardPositions()[i][j + 1].getEnumStatesOfBoard());
+//				if(game.getBoard().getBoardPositions()[i][j].getEnumStatesOfBoard().equals(EnumStatesOfBoard.EMPTY)) {
+//					winner = 1;
+//				}
 			}
 			
 			for (int j = 0; j < 3; j++) {
-				winner = game.getBoard().getBoardPositions()[j][i].getEnumStatesOfBoard().compareTo(
-						game.getBoard().getBoardPositions()[j + 1][i].getEnumStatesOfBoard());
-				
+//				winner = game.getBoard().getBoardPositions()[j][i].getEnumStatesOfBoard().compareTo(
+//						game.getBoard().getBoardPositions()[j + 1][i].getEnumStatesOfBoard());				
 			}			
 			
 			if(winner == 0) {
@@ -28,6 +27,9 @@ public class EngineGame {
 			}
 		}
 		
+		for (int i = 0; i < 9; i++) {
+			
+		}
 		
 		return game;
 	}

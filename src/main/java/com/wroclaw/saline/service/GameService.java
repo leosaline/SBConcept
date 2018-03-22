@@ -1,6 +1,7 @@
 package com.wroclaw.saline.service;
 
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.wroclaw.saline.engine.EngineGame;
 import com.wroclaw.saline.entity.Board;
 import com.wroclaw.saline.entity.Game;
+import com.wroclaw.saline.entity.PositionInBoard;
 import com.wroclaw.saline.entity.User;
 import com.wroclaw.saline.enums.EnumStatesOfBoard;
 import com.wroclaw.saline.repository.BoardRepository;
 import com.wroclaw.saline.repository.GameRepository;
+import com.wroclaw.saline.repository.PositionInBoardRepository;
 import com.wroclaw.saline.repository.UserRepository;
 
 @Service
@@ -25,6 +28,9 @@ public class GameService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private PositionInBoardRepository positionRepository;
 	
 	public GameService() {
 	}
@@ -40,7 +46,15 @@ public class GameService {
 			throw new IllegalArgumentException("dont find user");
 		}
 		
-		Board board = boardRepository.save(new Board());
+		Board board = new Board();
+		board.setBoardPositions(new HashSet<>());
+		
+		for (int i = 0; i < 9; i++) {
+			PositionInBoard position = positionRepository.save(new PositionInBoard(EnumStatesOfBoard.EMPTY));
+			board.getBoardPositions().add(position);
+		}
+		
+		board = boardRepository.save(board);
 		game.setBoard(board);
 		game.setUser(user);
 		game.setDateCreated(new Date());
@@ -59,31 +73,32 @@ public class GameService {
 		return game;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	private void validateMovement(Game game) {
+		
 		if(game.isFinished()) {
 			throw new IllegalArgumentException("game already finished, create new game");
 		} else {
 			Game gameSaved = gameRepository.findOne(game.getId());
 			gameSaved.getBoard().getBoardPositions();
-			int quantityMov = 0;
+//			int quantityMov = 0;
 			
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
-					if(game.getBoard().getBoardPositions()[i][j] != gameSaved.getBoard().getBoardPositions()[i][j]) {
-						quantityMov++;
-						if(quantityMov == 2) {
-							throw new IllegalArgumentException("Only one movement per time allowed");
-						}
-						
-						if(gameSaved.getBoard().getBoardPositions()[i][j].equals(EnumStatesOfBoard.BALL)
-								|| gameSaved.getBoard().getBoardPositions()[i][j].equals(EnumStatesOfBoard.ROUND)) {
-							throw new IllegalArgumentException("Place in board already selected, please select another move");
-						}
-					}
+//					if(game.getBoard().getBoardPositions()[i][j] != gameSaved.getBoard().getBoardPositions()[i][j]) {
+//						quantityMov++;
+//						if(quantityMov == 2) {
+//							throw new IllegalArgumentException("Only one movement per time allowed");
+//						}
+//						
+//						if(gameSaved.getBoard().getBoardPositions()[i][j].equals(EnumStatesOfBoard.BALL)
+//								|| gameSaved.getBoard().getBoardPositions()[i][j].equals(EnumStatesOfBoard.ROUND)) {
+//							throw new IllegalArgumentException("Place in board already selected, please select another move");
+//						}
+//					}
 				}
 			}
 			
 		}
+		
 	}
 }

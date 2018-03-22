@@ -1,24 +1,22 @@
 package com.wroclaw.saline.entity;
 
-import java.util.Arrays;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.wroclaw.saline.enums.EnumStatesOfBoard;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Board {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private PositionInBoard[][] boardPositions;
+	@OneToMany(mappedBy="board")
+	private Set<PositionInBoard> boardPositions;
 	
 	public Board() {
-		boardPositions = new PositionInBoard[3][3];
-		Arrays.stream(boardPositions).map(v -> EnumStatesOfBoard.EMPTY);
 	}
 
 	public Integer getId() {
@@ -29,11 +27,11 @@ public class Board {
 		this.id = id;
 	}
 
-	public PositionInBoard[][] getBoardPositions() {
+	public Set<PositionInBoard> getBoardPositions() {
 		return boardPositions;
 	}
 
-	public void setBoardPositions(PositionInBoard[][] boardPositions) {
+	public void setBoardPositions(Set<PositionInBoard> boardPositions) {
 		this.boardPositions = boardPositions;
 	}
 }
