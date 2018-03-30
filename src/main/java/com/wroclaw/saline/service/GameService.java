@@ -2,6 +2,7 @@ package com.wroclaw.saline.service;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +68,7 @@ public class GameService {
 		validateMovement(game);
 		
 		EngineGame engineGame = new EngineGame();
-		game = engineGame.executeMovement(game, gameRepository.findOne(game.getId()));
+		game = engineGame.executeMovement(game, gameRepository.findById(game.getId()));
 		
 		
 		return game;
@@ -78,8 +79,8 @@ public class GameService {
 		if(game.isFinished()) {
 			throw new IllegalArgumentException("game already finished, create new game");
 		} else {
-			Game gameSaved = gameRepository.findOne(game.getId());
-			gameSaved.getBoard().getBoardPositions();
+			Optional<Game> gameSaved = gameRepository.findById(game.getId());
+			gameSaved.get().getBoard().getBoardPositions();
 //			int quantityMov = 0;
 			
 			for (int i = 0; i < 4; i++) {

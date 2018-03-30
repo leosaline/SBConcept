@@ -1,11 +1,12 @@
 package com.wroclaw.saline.engine;
 
+import java.util.Optional;
+
 import com.wroclaw.saline.entity.Game;
-import com.wroclaw.saline.enums.EnumStatesOfBoard;
 
 public class EngineGame {
 
-	public Game executeMovement(Game game, Game gameSaved) {
+	public Game executeMovement(Game game, Optional<Game> optional) {
 		int winner = 0;
 		
 		for (int i = 0; i < 3; i++) {
