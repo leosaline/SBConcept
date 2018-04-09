@@ -6,7 +6,7 @@ import com.wroclaw.saline.entity.Game;
 
 public class EngineGame {
 
-	public Game executeMovement(Game game, Optional<Game> optional) {
+	public Game executeMovement(Game game, Optional<Game> gameSaved) {
 		int winner = 0;
 		
 		for (int i = 0; i < 3; i++) {
